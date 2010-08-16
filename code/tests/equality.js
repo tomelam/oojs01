@@ -1,12 +1,12 @@
 // Copyright 2010 Tom Elam
 
-dojo.provide("oojs01.tests.equality");
+dojo.provide("code.tests.equality");
 
 
 // Test our understanding of equality.
 
 tests.register(
-    "oojs01.tests.equality",
+    "code.tests.equality",
 [
 {
     name: "1. 3 == new Number(3) but 3 !=== new Number(3)",

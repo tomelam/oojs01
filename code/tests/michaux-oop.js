@@ -1,10 +1,10 @@
 // Copyright 2010 Tom Elam
 
-dojo.provide("oojs01.tests.michaux-oop");
+dojo.provide("code.tests.michaux-oop");
 
 
 tests.register(
-"oojs01.tests.michaux-oop",
+"code.tests.michaux-oop",
 [
 {
     name: "Peter Michaux's (michaux.ca) OO",

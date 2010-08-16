@@ -1,12 +1,12 @@
 // Copyright 2010 Tom Elam
 
-dojo.provide("oojs01.tests.oo");
+dojo.provide("code.tests.oo");
 
 
 // Tests of object-oriented features in JavaScript.
 
 tests.register(
-"oojs01.tests.oo",
+"code.tests.oo",
 [
 {
     name: "1. Lightweight Smalltalky object",

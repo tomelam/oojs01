@@ -1,12 +1,12 @@
 // Copyright 2010 Tom Elam
 
-dojo.provide("oojs01.tests.json");
+dojo.provide("code.tests.json");
 
 
 // Explore JSON and object serialization.
 
 tests.register(
-"oojs01.tests.json",
+"code.tests.json",
 [
 {
     name: "1. JSON is a subset of JavaScript -- just object literals",
@@ -21,7 +21,7 @@ tests.register(
     runTest: function() {
 	doh.assertEqual('formatting', obj.purpose);
 	doh.assertEqual('margin: 0pt;', obj.style);
-	dojo.require("oojs01.json2");
+	dojo.require("code.json2");
 	doh.assertEqual('{"purpose":"formatting","style":"margin: 0pt;"}',
 			myJSONtext);
 	var obj2;
@@ -33,7 +33,7 @@ tests.register(
 {
     name: "2. Use JSON.parse(myJSONtext) for security",
     setUp: function() {
-	dojo.require("oojs01.json2");
+	dojo.require("code.json2");
 	text = JSON.stringify({ type: 'command', subtype: 'move' });
 	console.debug('text => ' + text);
     },

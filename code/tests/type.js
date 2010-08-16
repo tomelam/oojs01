@@ -1,12 +1,12 @@
 // Copyright 2010 Tom Elam
 
-dojo.provide("oojs01.tests.type");
+dojo.provide("code.tests.type");
 
 
 // The 'new' operator and syntactic sugar.
 
 tests.register(
-"oojs01.tests.type",
+"code.tests.type",
 [
 {
     name: "1. An instance of the Object 'class' is created using the 'new' operator or syntactic sugar and inspected using 'typeof' and 'instanceof'",

@@ -1,6 +1,6 @@
 // Copyright 2010 Tom Elam
 
-dojo.provide("oojs01.tests.mutable");
+dojo.provide("code.tests.mutable");
 
 
 // Test mutability of objects in JavaScript.
@@ -10,7 +10,7 @@ dojo.provide("oojs01.tests.mutable");
 // other constructors.
 
 tests.register(
-"oojs01.tests.mutable",
+"code.tests.mutable",
 [
 {
     name: "1. Objects are mutable: a property can be added to an instance",

@@ -1,12 +1,12 @@
 // Copyright 2010 Tom Elam
 
-dojo.provide("oojs01.tests.arrays");
+dojo.provide("code.tests.arrays");
 
 
 // Explore the 'array' type.
 
 tests.register(
-"oojs01.tests.arrays",
+"code.tests.arrays",
 [
 {
     name: "1. A number (a value of type 'number') does not have the type 'object' and is not an instance of the class Number or the class Object",

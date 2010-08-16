@@ -1,6 +1,6 @@
 // Copyright 2010 Tom Elam
 
-dojo.provide("oojs01.tests.primitives");
+dojo.provide("code.tests.primitives");
 
 
 // Explore primitive types (number, string, boolean) and types
@@ -16,7 +16,7 @@ dojo.provide("oojs01.tests.primitives");
 // Number, and Boolean.
 
 tests.register(
-"oojs01.tests.primitives",
+"code.tests.primitives",
 [
 {
     name: "1. A number (a value of type 'number') does not have the type 'object' and is not an instance of the class Number or the class Object",
