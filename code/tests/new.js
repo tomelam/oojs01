@@ -1,12 +1,12 @@
 // Copyright 2010 Tom Elam
 
-dojo.provide("code.tests.type");
+dojo.provide("code.tests.new");
 
 
 // The 'new' operator and syntactic sugar.
 
 tests.register(
-"code.tests.type",
+"code.tests.new",
 [
 {
     name: "1. An instance of the Object 'class' is created using the 'new' operator or syntactic sugar and inspected using 'typeof' and 'instanceof'",
@@ -15,8 +15,8 @@ tests.register(
 	simpleObject2 = {};
     },
     runTest: function() {
-	doh.assertEqual("object", typeof simpleObject);
-	doh.assertEqual("object", typeof simpleObject2);
+	doh.assertTrue(typeof simpleObject == "object");
+	doh.assertTrue(typeof simpleObject2 == "object");
 	doh.assertTrue(simpleObject instanceof Object);
 	doh.assertTrue(simpleObject2 instanceof Object);
     }
@@ -28,8 +28,8 @@ tests.register(
 	simpleArray2 = [];
     },
     runTest: function() {
-	doh.assertEqual("object", typeof simpleArray);
-	doh.assertEqual("object", typeof simpleArray2);
+	doh.assertTrue(typeof simpleArray == "object");
+	doh.assertTrue(typeof simpleArray2 == "object");
 	doh.assertTrue(simpleArray instanceof Array);
 	doh.assertTrue(simpleArray2 instanceof Array);
     }

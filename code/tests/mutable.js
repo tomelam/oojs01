@@ -74,10 +74,10 @@ tests.register(
 {
     name: "4. Can't assign a property of an undefined reference (i.e. variable)",
     setUp: function() {
-	badFun = function() { nn.a = 1; };
+	badProperty = function() { nn.a = 1; };
     },
     runTest: function() {
-	doh.assertError(ReferenceError, window, 'badFun', [],
+	doh.assertError(ReferenceError, window, 'badProperty', [],
 			"Can't assign a property of an undefined variable");
 	try {
 	    oo.b = 2;
