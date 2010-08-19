@@ -1,57 +1,13 @@
 // Copyright 2010 Tom Elam
 
-dojo.provide("code.tests.oo");
+dojo.provide("code.tests.protection");
 
 
-// Tests of object-oriented features in JavaScript.
+// Examples of how to implement protection criteria of OO.
 
 tests.register(
-"code.tests.oo",
+"code.tests.protection",
 [
-{
-    name: "1. Lightweight Smalltalky object",
-    runTest: function() {
-	// An example of a way to create lightweight objects using the
-	// message-passing style of programming. This is modelled
-	// after an example in _Structure and Interpretation of
-	// Computer Programs_.
-	var cons = function(x, y) {
-	    return function(m) {
-		if (m == 0) {
-		    return x;
-		} else if (m == 1) {
-		    return y;
-		} else {
-		    console.debug("** Error: Message not understood: " + m);
-		    throw new TypeError(
-			"Message not understood: " + m);
-		};
-	    };
-	};
-	var car = function(z) { return z(0); };
-	var cdr = function(z) { return z(1); };
-	var foo = cons(3, 4);
-
-	console.group('foo');
-	console.dir(foo);
-	console.groupEnd();
-	console.debug('typeof foo => ' + typeof foo + ', foo => ');
-	console.debug(foo.toString());
-	foo.printY = function() { console.debug('this => ' + this +
-						', this.y => ' + this.y); }
-	foo.printY();
-
-	doh.assertEqual(foo(0), 3, "a message works");
-	doh.assertEqual(foo(1), 4, "another message works");
-	doh.assertEqual(car(foo), 3, "a shortcut works");
-	doh.assertEqual(cdr(foo), 4, "the other shortcut works");
-	passBadMessage = function() { // Let this be a method of window.
-	    foo(2);
-	}
-	doh.assertError(TypeError, window, 'passBadMessage', [],
-			"Try passing a bad message to foo");
-    }
-},
 {
     name:
     "Feature #2: Protection: the inability of the client of a type to " +
@@ -198,5 +154,5 @@ tests.register(
 	doh.assertEqual('string', typeof myComponent2.getElement());
 	doh.assertEqual('This is just a string!', myComponent2.getElement());
     }
-},
+}
 ]);

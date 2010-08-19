@@ -85,5 +85,20 @@ tests.register(
 	    console.debug("** Caught exception: " + exception);
 	}
     }
+},
+{
+    name: "5. Since functions are objects, properties can be added to them",
+    runTest: function() {
+	function logError(message) {
+	    console.log(message);
+	    logError.numErrors++;
+	};
+	logError.numErrors = 0;
+	doh.assertEqual(logError.numErrors, 0);
+	logError("first error");
+	doh.assertEqual(logError.numErrors, 1);
+	logError("second error");
+	doh.assertEqual(logError.numErrors, 2);
+    }
 }
 ]);
