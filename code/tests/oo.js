@@ -10,44 +10,46 @@ tests.register(
 [
 {
     name: "1. Lightweight Smalltalky object",
-    setUp: function() {
-	//// An example of a way to create lightweight objects.
-	cons = function(x, y) {
+    runTest: function() {
+	// An example of a way to create lightweight objects using the
+	// message-passing style of programming. This is modelled
+	// after an example in _Structure and Interpretation of
+	// Computer Programs_.
+	var cons = function(x, y) {
 	    return function(m) {
 		if (m == 0) {
 		    return x;
 		} else if (m == 1) {
 		    return y;
 		} else {
-		    throw new Error(
+		    console.debug("** Error: Message not understood: " + m);
+		    throw new TypeError(
 			"Message not understood: " + m);
 		};
 	    };
 	};
-	car = function(z) { return z(0); };
-	cdr = function(z) { return z(1); };
-	foo = cons(3, 4);
-    },
-    runTest: function() {
+	var car = function(z) { return z(0); };
+	var cdr = function(z) { return z(1); };
+	var foo = cons(3, 4);
+
 	console.group('foo');
 	console.dir(foo);
 	console.groupEnd();
 	console.debug('typeof foo => ' + typeof foo + ', foo => ');
 	console.debug(foo.toString());
-	foo.printY = function() { console.debug('this => ' + this + ', this.y => ' + this.y); }
+	foo.printY = function() { console.debug('this => ' + this +
+						', this.y => ' + this.y); }
 	foo.printY();
 
 	doh.assertEqual(foo(0), 3, "a message works");
 	doh.assertEqual(foo(1), 4, "another message works");
 	doh.assertEqual(car(foo), 3, "a shortcut works");
 	doh.assertEqual(cdr(foo), 4, "the other shortcut works");
-	//FIXME: There is doh.assertError. Use something like it.
-	//FIXME: Show a hint, as in the doh.assert... calls.
-	try {
+	passBadMessage = function() { // Let this be a method of window.
 	    foo(2);
-	    doh.t(); // If foo(2) succeeded, force an error here.
-	} catch(e) {
-	};
+	}
+	doh.assertError(TypeError, window, 'passBadMessage', [],
+			"Try passing a bad message to foo");
     }
 },
 {

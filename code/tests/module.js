@@ -1,6 +1,5 @@
 // Copyright 2010 Tom Elam
 
-
 dojo.provide("code.tests.module");
 
 try{

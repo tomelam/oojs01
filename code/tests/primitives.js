@@ -11,6 +11,16 @@ dojo.provide("code.tests.primitives");
 
 // Explore literals and references.
 
+// Values are typed, not variables, and a value can have only one
+// type, i.e. only one result of applying the typeof operator to it.
+
+// As _JavaScript: The Definitive Guide_ explains in section 3.15.2,
+// there is no way to test whether a value of type 'string' is copied
+// and passed by reference or by value. A value of type 'string' is
+// immutable and there is no way to test that because there is no way
+// to set just part of a 'string' value. Trying to set the whole thing
+// creates a new 'string' value rather than modify data in place.
+
 // Note that we refer to 'classes'. For a want of a better term, this
 // is how we and other JavaScript programmers refer to Object, String,
 // Number, and Boolean.
@@ -36,7 +46,6 @@ tests.register(
     name: "1. null is of type 'object' and has the same value as the 'undefined' value",
     runTest: function() {
 	var set1 = null, data1;
-
 	var setPropertyOfNullObject = function() {
 	    var set2 = null;
 	    set2.prop1 = "value x";
@@ -69,15 +78,14 @@ tests.register(
     }
 },
 {
-    name: "2. The data type 'undefined' has only one value, a special value",
+    name: "2. The primitive data type 'undefined' can have only one value, a special value",
     runTest: function() {
 	var data1;
 	var data2 = data1;
-
-	fun1 = function() {
+	var fun1 = function() {
 	    console.debug("Return no value explicitly.");
 	}
-	fun2 = function() {
+	var fun2 = function() {
 	    console.debug("Again return no value explicitly.");
 	}
 
@@ -105,9 +113,8 @@ tests.register(
     }
 },
 {
-    name: "3. A number (a value of type 'number') does not have the type 'object' and is not an instance of the class Number or the class Object",
+    name: "3. A value of primitive type 'number' is not an instance of the class Number or the class Object",
     runTest: function() {
-
 	// What kind of thing is a primitive number?
 	doh.assertTrue("number" == typeof 1);
 	doh.assertFalse("object" == typeof 1);
@@ -120,27 +127,7 @@ tests.register(
     }
 },
 {
-    name: "4. Instances of the Number class *are* of type 'object'",
-    runTest: function() {
-	var number1 = new Number(3);
-	var number2 = new Number(3);
-
-	// What kind of a thing is an instance of the Number class?
-	doh.assertTrue(typeof new Number(3) == 'object');
-	doh.assertTrue(typeof new Number() == 'object'); // Even this works!
-
-	// Let's compare some values:
-	doh.assertFalse(new Number(3) == new Number(3)); // Can't compare refs!
-	doh.assertFalse(number1 == number2);             // Not even this way.
-	doh.assertFalse(new Number(4) === new Number(4));//Different references.
-	doh.assertFalse(number1 === number2);            //Different references.
-	doh.assertTrue(new Number() == 0);               // Default value.
-	doh.assertTrue(3 == new Number(3));        // Autoconversion (unboxing).
-	doh.assertTrue(new Number(3) == 3);        // Autoconversion (unboxing).
-    }
-},
-{
-    name: "5. A number (a value of type 'number') is copied, passed, and compared by value, not by reference",
+    name: "4. A value of primitive type 'number' is copied, passed, and compared by value, not by reference",
     runTest: function() {
 	var number1 = 3;
 	var number2 = 4;
@@ -167,129 +154,139 @@ tests.register(
     }
 },
 {
+    name: "5. Instances of the Number class *are* of type 'object'",
+    runTest: function() {
+	var number1 = new Number(3);
+	var number2 = new Number(3);
+
+	// What kind of a thing is an instance of the Number class?
+	doh.assertTrue(typeof new Number(3) == 'object');
+	doh.assertTrue(typeof new Number() == 'object'); // Even this works!
+
+	// Let's compare some values:
+	doh.assertFalse(new Number(3) == new Number(3)); // Can't compare refs!
+	doh.assertFalse(number1 == number2);             // Not even this way.
+	doh.assertFalse(new Number(4) === new Number(4));//Different references.
+	doh.assertFalse(number1 === number2);            //Different references.
+	doh.assertTrue(new Number() == 0);               // Default value.
+	doh.assertTrue(3 == new Number(3));        // Autoconversion (unboxing).
+	doh.assertTrue(new Number(3) == 3);        // Autoconversion (unboxing).
+    }
+},
+{
     name: "6. Instances of the Number class must be converted before value comparison",
     runTest: function() {
 	var number1 = new Number(1);
 	var number2 = new Number(1);
 	var number3 = number2;
-	doh.assertFalse(number1 == number2);  // 2 different references.
-	doh.assertTrue(number2 == number3);   // 2 references to the same thing.
+	doh.assertFalse(number1 == number2); // 2 different objects!
+	doh.assertTrue(number2 === number3); // 2 references to the same object.
+	doh.assertTrue(number2 == number3);  // Only because it's one object!
 	doh.assertTrue(number1.valueOf() ==
-		       number2.valueOf());    // Compare primitives.
+		       number2.valueOf());   // Compare primitives.
     }
 },
 {
-    name: "8. Comparing references to numbers is not the same as comparing the numbers' values",
+    name: "7. A value of primitive type 'string' is not an instance of the class String or the class Object",
     runTest: function() {
-	var number1 = new Number(1), number2 = new Number(1);
-	var number3 = number1;
-	doh.assertFalse(number1 === number2); // Different objects.
-	doh.assertTrue(number1 === number3);  // Copied by reference.
-    }
-},
-{
-    name: "9. A value of type 'string' does not have the type 'object' and is not an instance of the class String or the class Object",
-    runTest: function() {
-	doh.assertEqual("string", typeof "Hello, string!");
-	doh.assertNotEqual("object", typeof "Hello, string!");
+	doh.assertTrue(typeof "Hello, string!" == "string");
 	doh.assertFalse("Hello, string!" instanceof String);
 	doh.assertFalse("Hello, string!" instanceof Object);
     }
 },
 {
+    name: "8. A value of primitive type 'string' is compared by reference, not by value",
+    runTest: function() {
+	// Copied from _JavaScript: The Definitive Guide, 2nd Ed., p. 48.
+	var s1 = "hello";
+	var s2 = "hell" + "o";
+	doh.assertTrue(s1 == s2);
+    }
+},
+{
+    name: "9. Object modification results in a new object",
+    runTest: function() {
+	// This test is modelled after an example in _Pro JavaScript
+	// Techniques_, 2006, by John Resig.
+
+	// Set item equal to a new string object
+	var item = "test";
+	// itemRef now refers to the same string object
+	var itemRef = item;
+
+	// Concatenate some new text onto the string object
+	// NOTE: This creates a new object, and does not modify
+	// the original object.
+	item += "ing";
+	// The values of item and itemRef are NOT equal, as a whole
+	// new string object has been created
+	doh.assertFalse(item == itemRef);
+    }
+},
+{
     name: "10. Instances of the String class *are* of type 'object'",
     runTest: function() {
-	doh.assertEqual("Hello, string object!",
-			new String("Hello, string object!"));
-	doh.assertEqual("object", typeof new String("Hello, string object!"));
-	doh.assertEqual("object", typeof new String()); // Even this works!
-	doh.assertEqual("", new String());
+	doh.assertTrue("Hello, string object!" ==
+		       new String("Hello, string object!"));
+	doh.assertTrue(typeof new String("Hello, string object!") == "object");
+	doh.assertTrue(typeof new String() == "object"); // Even this works!
+	doh.assertTrue(new String() == "");
     }
 },
 {
-    name: "11. Is it true a string (a value of type 'string') is copied, or passed, by reference, not by value?",
+    name: "11. Comparing references to strings is not the same as comparing those strings' values",
     runTest: function() {
-	console.debug("It's not possible to write a test to determine this! See JS:TDG 3.15.2.");
-    }
-},
-{
-    name: "12. A string (a value of type 'string') is compared by reference, not by value",
-    runTest: function() {
-	doh.assertTrue();
-    }
-},
-{
-    name: "13. Instances of the String class must be converted before comparison",
-    setUp: function() {
-	string1 = new String("a string");
-	string2 = new String("a string");
-    },
-    runTest: function() {
-	doh.assertFalse(string1 == string2);
-	doh.assertTrue(string1.toString() == string2.toString()); //Primitives.
-    }
-},
-{
-    name: "14. Comparing references to strings is not the same as comparing those strings' values",
-    runTest: function() {
+	var string1 = new String("a string");
+	var string2 = new String("a string");
 	var string3 = string1;
+
 	doh.assertFalse(string1 === string2); // Different objects.
 	doh.assertTrue(string1 == string3); // The same object w/ 2 references.
 	doh.assertTrue(string1 === string3);
     }
 },
 {
-    name: "15. true and false do not have the type 'object' and are not instances of the class Boolean or the class Object",
+    name: "12. Instances of the String class must be converted before comparison",
+    runTest: function() {
+	var string1 = new String("a new string");
+	var string2 = new String("a new string");
+
+	doh.assertFalse(string1 == string2);
+	doh.assertTrue(string1.toString() == string2.toString()); //Primitives.
+    }
+},
+{
+    name: "13. true & false are of type 'boolean' and are not instances of the class Boolean or the class Object",
     runTest: function() {
 	// Explore true:
-	doh.assertEqual("boolean", typeof true);
-	doh.assertNotEqual("object", typeof true);
+	doh.assertTrue(typeof true == "boolean");
 	doh.assertFalse(true instanceof Boolean);
 	doh.assertFalse(true instanceof Object);
 	// Explore false:
-	doh.assertEqual("boolean", typeof false);
-	doh.assertNotEqual("object", typeof false);
+	doh.assertTrue(typeof false == "boolean");
 	doh.assertFalse(false instanceof Boolean);
 	doh.assertFalse(false instanceof Object);
     }
 },
 {
-    name: "16. Instances of the Boolean class *are* of type 'object'",
+    name: "14. Instances of the Boolean class *are* of type 'object'",
     runTest: function() {
-	doh.assertEqual(true, new Boolean(true));
-	doh.assertEqual("object", typeof new Boolean(true));
-	doh.assertEqual("object", typeof new Boolean()); // Even this works!
+	doh.assertTrue(new Boolean(true) == true);
+	doh.assertTrue(typeof new Boolean(true) == "object");
 
-	doh.assertEqual(false, new Boolean(false));
-	doh.assertEqual("object", typeof new Boolean(false));
-	doh.assertEqual("object", typeof new Boolean()); // Even this works!
-
-	doh.assertEqual(false, new Boolean());
+	doh.assertTrue(new Boolean(false) == false);
+	doh.assertTrue(typeof new Boolean(false) == "object");
+	doh.assertTrue(new Boolean() == false);           // Default value.
+	doh.assertTrue(typeof new Boolean() == "object"); // Even this works!
     }
 },
 {
-    name: "17. Instances of the Boolean class must be converted before comparison",
-    setUp: function() {
-	boolean1 = new String(true);
-	boolean2 = new String(true);
-    },
+    name: "15. Instances of the Boolean class must be converted before comparison",
     runTest: function() {
+	var boolean1 = new String(true);
+	var boolean2 = new String(true);
 	doh.assertFalse(boolean1 == boolean2);
 	doh.assertTrue(boolean1.valueOf() == boolean2.valueOf()); //Primitives.
-    }
-},
-{
-    name: "18. Strings are immutable",
-    setUp: function() {
-	string = "Original";
-	tryToModifyString = function(s) {
-	    s = "Changed!";
-	    doh.assertEqual("Changed!", s);
-	}
-	tryToModifyString(string);
-    },
-    runTest: function() {
-	doh.assertEqual("Original", string);
     }
 }
 ]);
