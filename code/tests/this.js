@@ -17,4 +17,5 @@ tests.register(
 	}
 	getContext();
     }
-},
+}
+]);
