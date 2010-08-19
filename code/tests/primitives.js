@@ -204,7 +204,7 @@ tests.register(
     }
 },
 {
-    name: "9. Object modification results in a new object",
+    name: "9. String object modification results in a new object",
     runTest: function() {
 	// This test is modelled after an example in _Pro JavaScript
 	// Techniques_, 2006, by John Resig.
