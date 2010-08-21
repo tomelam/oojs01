@@ -45,10 +45,10 @@ tests.register(
 						', this.y => ' + this.y); }
 	foo.printY();
 
-	doh.assertEqual(foo(0), 3, "a message works");
-	doh.assertEqual(foo(1), 4, "another message works");
-	doh.assertEqual(car(foo), 3, "a shortcut works");
-	doh.assertEqual(cdr(foo), 4, "the other shortcut works");
+	doh.assertEqual(3, foo(0), "a message works");
+	doh.assertEqual(4, foo(1), "another message works");
+	doh.assertEqual(3, car(foo), "a shortcut works");
+	doh.assertEqual(4, cdr(foo), "the other shortcut works");
 	passBadMessage = function() { // Let this be a method of window.
 	    foo(2);
 	}

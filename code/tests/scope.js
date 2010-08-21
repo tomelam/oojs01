@@ -10,34 +10,73 @@ tests.register(
 "code.tests.scope",
 [
 {
-    name: "1. Declarations 'as if' ride to the top of a function, but initializations don't",
+    name: "1. There is no block scope",
+    runTest: function() {
+	var var1 = 1;
+	if (var1 == 1) {
+	    var foo = 2;
+	} else {
+	    var bar = 3;
+	};
+
+	doh.assertEqual("number", typeof foo);
+	doh.assertEqual("undefined", typeof bar);
+	var1 = 0;
+	if (var1 == 1) {
+	    var foo = 2;
+	} else {
+	    var bar = 3;
+	};
+	doh.assertEqual("number", typeof bar);
+
+	switch(bar) {
+	case 3:
+	    var bird = 4;
+	    break;
+	default:
+	    break;
+	};
+	doh.assertEqual(typeof bird, "number");
+
+	while (bar) {
+	    var gecko;  // Executed every time through the loop!
+	    console.debug(typeof gecko);
+	    if (typeof gecko != "undefined") {
+		doh.asserEqual(0, gecko);
+	    };
+	    bar--;
+	};
+    }
+},
+{
+    name: "2. Declarations ride to the top of a function, but initializations don't",
     runTest: function() {
 	// Pp. 71 - 72, _Object-Oriented JavaScript_, Packt.
 	
 	var a = 123;
 	function f() {
-	    doh.assertEqual(typeof a, "undefined");
+	    doh.assertEqual("undefined", typeof a);
 	    var a = 1;
-	    doh.assertEqual(a, 1);
-	}
+	    doh.assertEqual(1, a);
+	};
 	f();
     }
 },
 {
-    name: "2. A function creates a scope",
+    name: "3. A function creates a scope",
     runTest: function() {
 	// P. 80, _Object-Oriented JavaScript_, Packt.
 	var a = 1;
 	function f(){
 	    var b = 1;
 	    return a;
-	}
+	};
 	doh.assertEqual(f(), 1);
 	doh.assertEqual(typeof b, "undefined");
     }
 },
 {
-    name: "3. Function scope can be nested",
+    name: "4. Function scope can be nested",
     runTest: function() {
 	// P. 81, _Object-Oriented JavaScript_, Packt.
 	var a = 1;
@@ -52,7 +91,7 @@ tests.register(
 		doh.assertEqual(typeof a, "number");
 		doh.assertEqual(typeof b, "number");
 		doh.assertEqual(typeof c, "number");
-	    }
+	    };
 	    console.debug("In function f");
 	    doh.assertEqual(typeof a, "number");
 	    doh.assertEqual(typeof c, "undefined");
@@ -62,7 +101,7 @@ tests.register(
     }
 },
 {
-    name: "4. Functions have lexical scope",
+    name: "5. Functions have lexical scope",
     runTest: function() {
 	// Pp. 81 - 81, _Object-Oriented JavaScript_, Packt.
 
@@ -78,11 +117,11 @@ tests.register(
 	f1 = function() {
 	    var a = 1;
 	    return f2();
-	}
+	};
 	f2 = function() {
 	    console.debug("typeof a: " + typeof a);
 	    return a;
-	}
+	};
 	//f1();
 
 	doh.assertError(ReferenceError, window, "f1", [], "a is undefined");
@@ -103,16 +142,16 @@ tests.register(
 	    doh.assertTrue(false); // Make sure we find out if we're wrong.
 	} catch(exception) {
 	    console.debug("Error: " + exception);
-	}
+	};
 
 	f2 = function() {
 	    return a * 2;
-	}
+	};
 	doh.assertEqual(f1(), 10);
     }
 },
 {
-    name: "5. 'Breaking' the scope chain with a closure",
+    name: "6. 'Breaking' the scope chain with a closure",
     runTest: function() {
 	// Pp. 84 - 85, _Object-Oriented JavaScript_, Packt.
 
@@ -120,15 +159,15 @@ tests.register(
 	    var b = "b";
 	    return function() {
 		return b;
-	    }
-	}
+	    };
+	};
 	doh.assertEqual(typeof b, "undefined");
 	var n = f();
 	doh.assertEqual(n(), "b");
     }
 },
 {
-    name: "6. 'Breaking' the scope chain with a closure (a different way)",
+    name: "7. 'Breaking' the scope chain with a closure (a different way)",
     runTest: function() {
 	// P. 85, _Object-Oriented JavaScript_, Packt.
 
@@ -137,25 +176,25 @@ tests.register(
 	    var b = "b";
 	    n = function() {
 		return b;
-	    }
-	}
+	    };
+	};
 	doh.assertError(TypeError, window, "n", [], "Function not yet defined");
 	f();
 	doh.assertEqual(n(), "b");
     }
 },
 {
-    name: "7. A function binds to its scope where defined, not where executed",
+    name: "8. A function binds to its scope where defined, not where executed",
     runTest: function() {
 	// Pp. 85 - 86, _Object-Oriented JavaScript_, Packt.
 
 	function f(arg) {
 	    var n = function() {
 		return arg;
-	    }
+	    };
 	    arg++;
 	    return n;
-	}
+	};
 	var m = f(123);
 	doh.assertEqual(m(), 124);
     }

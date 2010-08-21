@@ -94,11 +94,11 @@ tests.register(
 	    logError.numErrors++;
 	};
 	logError.numErrors = 0;
-	doh.assertEqual(logError.numErrors, 0);
+	doh.assertEqual(0, logError.numErrors);
 	logError("first error");
-	doh.assertEqual(logError.numErrors, 1);
+	doh.assertEqual(1, logError.numErrors);
 	logError("second error");
-	doh.assertEqual(logError.numErrors, 2);
+	doh.assertEqual(2, logError.numErrors);
     }
 }
 ]);
