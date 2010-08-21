@@ -103,7 +103,7 @@ tests.register(
 
 	var q2 = new Queue(2);
 	doh.assertEqual("abc", q2.unsharedVar);
-	doh.assertEqual("xyz", q1.unsharedVar); // Different for each instance.
+	doh.assertEqual("xyz", q1.unsharedVar); // Shadow property in prototype.
 
 	q2.getPriority = function() {           // Monkey patch q2.
 	    return "NOPRIORITY";

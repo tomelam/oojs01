@@ -72,7 +72,18 @@ tests.register(
     }
 },
 {
-    name: "4. Can't assign a property of an undefined reference (i.e. variable)",
+    name: "4. Classes, i.e. prototypes, can be changed, affecting all instances made previously and afterwards",
+    setUp: function() {
+	Person.prototype.city = "Mumbai";
+    },
+    runTest: function() {
+	doh.assertEqual("Mumbai", guy.city);
+	guy3 = new Person();
+	doh.assertEqual("Mumbai", guy3.city);
+    }
+},
+{
+    name: "5. Can't assign a property of an undefined reference (i.e. variable)",
     setUp: function() {
 	badProperty = function() { nn.a = 1; };
     },
@@ -87,7 +98,7 @@ tests.register(
     }
 },
 {
-    name: "5. Since functions are objects, properties can be added to them",
+    name: "6. Since functions are objects, properties can be added to them",
     runTest: function() {
 	function logError(message) {
 	    console.log(message);
