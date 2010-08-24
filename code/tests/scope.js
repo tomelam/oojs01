@@ -114,6 +114,7 @@ tests.register(
 	// that functions create their environment (scope) when they
 	// are defined, not when they are executed. Let's see an
 	// example:
+	var error = 0;
 	f1 = function() {
 	    var a = 1;
 	    return f2();
@@ -124,14 +125,27 @@ tests.register(
 	};
 	//f1();
 
-	doh.assertError(ReferenceError, window, "f1", [], "a is undefined");
+	// doh.assertError might not work in Internet Explorer.
+	//doh.assertError(ReferenceError, window, "f1", [], "a is undefined");
+	try {
+	    f1();
+	} catch(e) {
+	    error += 1;
+	};
+	doh.assertEqual(1, error);
 	a = 5;   // Same as 'var window.a = 5'. Has to be global for f2().
 	doh.assertEqual(f1(), 5);
 	a = 55;
 	doh.assertEqual(f1(), 55);
 
 	delete a;
-	doh.assertError(ReferenceError, window, "f1", [], "a is undefined");
+	//doh.assertError(ReferenceError, window, "f1", [], "a is undefined");
+	try {
+	    f1();
+	} catch(e) {
+	    error += 1;
+	};
+	doh.assertEqual(2, error);
 
 	a = 5;
 	delete f2;

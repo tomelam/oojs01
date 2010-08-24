@@ -1,4 +1,4 @@
-dojo.provide("code.json2");
+//dojo.provide("code.json2");
 
 //alert('IMPORTANT: Remove this line from json2.js before deployment.');
 /*

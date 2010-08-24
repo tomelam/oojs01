@@ -88,13 +88,16 @@ tests.register(
 	badProperty = function() { nn.a = 1; };
     },
     runTest: function() {
-	doh.assertError(ReferenceError, window, 'badProperty', [],
-			"Can't assign a property of an undefined variable");
+	var error = 0;
+	// doh.assertError might not work in Internet Explorer.
+	//doh.assertError(ReferenceError, window, 'badProperty', [],
+	//		  "Can't assign a property of an undefined variable");
 	try {
 	    oo.b = 2;
 	} catch(exception) {
-	    console.debug("** Caught exception: " + exception);
-	}
+	    error += 1;
+	};
+	doh.assertEqual(1, error);
     }
 },
 {

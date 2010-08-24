@@ -1,0 +1,61 @@
+<!-- Copyright 2010 Tom Elam -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tests of JSON Serialization and Deserialization of Objects</title>
+    
+    <link id="themeStyles" rel="stylesheet"
+	  href="../dojo/dijit/themes/tundra/tundra.css">
+
+    <script type="text/javascript"
+	    src="../dojo/dojo/dojo.js"></script>
+    <script type="text/javascript"
+	    src="../json2.js"></script>
+    <script type="text/javascript">
+      dojo.require("doh.runner");
+      dojo.addOnLoad(function() { doh.register("code.tests.json",
+[
+{
+    name: "1. JSON is a subset of JavaScript",
+    setUp: function() {
+	book = {
+	    title: "JavaScript: The Good Parts",
+	    author: "Douglas Crockford",
+	    publisher: "O'Reilly",
+	    isbn13: 9780596517748
+	};
+	myJSONtext = JSON.stringify(book);
+    },
+    runTest: function() {
+	var obj;
+	obj = eval('obj = ' + myJSONtext);
+	doh.assertEqual(book.title, obj.title);
+	doh.assertEqual(book.publisher, obj.publisher);
+	doh.assertEqual(book.isbn13, obj.isbn13);
+	doh.assertEqual("number", typeof obj.isbn13);
+    }
+    },
+{
+    name: "2. Use JSON.parse(myJSONtext) for security",
+    runTest: function() {
+	var obj = JSON.parse(myJSONtext);
+	doh.assertEqual(book.title, obj.title);
+	doh.assertEqual(book.publisher, obj.publisher);
+	doh.assertEqual(book.isbn13, obj.isbn13);
+	doh.assertEqual("number", typeof obj.isbn13);
+    }
+}
+]);
+doh.run();
+});
+    </script>
+
+  </head>
+<body class="tundra" style="padding: 50px;">
+
+  <h1 class="testTitle">JSON Tests</h1>
+
+</body>
+</html>
