@@ -15,12 +15,9 @@ try{
     dojo.require("code.tests.scope");
     dojo.require("code.tests.this");
     dojo.require("code.tests.patterns");
-
-/*
     dojo.require("code.tests.protection");
     dojo.require("code.tests.michaux-oop");
     dojo.require("code.tests.unit-testing");
-*/
 }catch(e){
     doh.debug(e);
 }
