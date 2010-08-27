@@ -118,7 +118,7 @@ tests.register(
     }
 },
 {
-    name: "4. Use the hasOwnProperty method to check whether a property has a particular property",
+    name: "4. Use the hasOwnProperty method to check whether an object has a particular property",
     runTest: function() {
 	doh.assertTrue(ram.hasOwnProperty('firstName'));
 	doh.assertFalse(jaya.hasOwnProperty('languages'));
