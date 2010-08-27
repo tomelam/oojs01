@@ -10,7 +10,7 @@ tests.register(
 [
 {
     name:
-    "Feature #2: Protection: the inability of the client of a type to " +
+    "OO Feature #2: Protection: the inability of the client of a type to " +
 	"detect its implementation, first coding attempt",
     // Source: http://www.crockford.com/javascript/private.html
     // The intent of Crockford's example code is to show how to create
@@ -60,7 +60,7 @@ tests.register(
 },
 {
     name:
-    "Feature #2: Protection: Crockford's code for private members, both " +
+    "OO Feature #2: Protection: Crockford's code for private members, both " +
 	"with and without the 'that' workaround to show why 'that' is " +
 	"necessary",
     setUp: function() {
@@ -133,7 +133,7 @@ tests.register(
 },
 {
     name:
-    "Feature #N: Ad hoc polymorphism - functions and data structures " +
+    "OO Feature #N: Ad hoc polymorphism - functions and data structures " +
 	"with parameters that can take on values of many different types",
     setUp: function() {
 	Component = function(param) {
