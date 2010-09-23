@@ -142,7 +142,7 @@ tests.register(
     }
 },
 {
-    name: "Z. Changing the constructor of an object on the fly",
+    name: "6. Changing the constructor of an object on the fly",
     runTest: function() {
 	var o = {};
 	doh.assertTrue(o instanceof Object);
