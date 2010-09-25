@@ -51,8 +51,7 @@ tests.register(
 	    set2.prop1 = "value x";
 	}
 	var setPropertyOfTheNull = function() {
-	    var set2 = null;
-	    set2.prop1 = "value x";
+	    null.prop1 = "value x";
 	}
 
 	// What kind of thing is null?
