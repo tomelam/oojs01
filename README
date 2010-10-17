@@ -1,6 +1,7 @@
 This project's purpose is to learn, teach, and codify basic knowledge of object-oriented programming in JavaScript.
 
-You'll need to install the code under a web server's document root, and you'll need to download the Dojo Toolkit SDK (http://downloads.dojotoolkit.org/release-1.5.0/dojo-release-1.5.0-src.tar.gz) and install it to match the symbolic link in my code. As of today, the symbolic link points to Dojo 1.5.0. If you use a different version of the SDK, adjust the link accordingly. 
+You'll need to install oojs01, the Dojo Toolkit SDK, Ext-JS (Ext-JS just for one test group), and json2.js under a web server's document root. Extract, if and as necessary, and put the Dojo Toolkit SDK (http://downloads.dojotoolkit.org/release-1.5.0/dojo-release-1.5.0-src.tar.gz), ext-js (http://www.sencha.com/products/js/download.php), and json2.js (http://www.json.org/json2.js) in the same directory as oojs01. Be sure to remove or comment-out the first line of json2.js.
+
 When you've got the code installed, you can run it by browsing to runTests.html.
 
 Please let me know how far you get and what you think.
@@ -12,3 +13,5 @@ Tom Elam
 http://tomelam.com
 
 Copyright 2010 Tom Elam
+
+oojs01 is licensed under the terms of the GPL 3.0 license.

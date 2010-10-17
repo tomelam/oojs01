@@ -1,0 +1,52 @@
+<!-- Copyright 2010 Tom Elam -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Tests of Object-Oriented Features of Ext JS</title>
+    
+    <link id="themeStyles" rel="stylesheet"
+	  href="../dojo/dijit/themes/tundra/tundra.css">
+
+    <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css"/>
+
+    <script type="text/javascript"
+	    src="../dojo/dojo/dojo.js"></script>
+    <script type="text/javascript"
+	    src="../ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript">
+      dojo.require("doh.runner");
+      dojo.addOnLoad(function() { doh.register("code.tests.extjs",
+[
+{
+    name: "1. Ext.apply helps create classes",
+    setUp: function() {
+	Animal = function(config) {
+	    this.kingdom = 'Animal';
+	    Ext.apply(this, config);
+	};
+    },
+    runTest: function() {
+	var anu = new Animal({name: 'Anu',
+			     greet: function() {
+				 return "Hi! My name is " + this.name;
+			     }
+			    });
+	console.dir(anu);
+	doh.assertEqual("Animal", anu.kingdom);
+	doh.assertEqual("Anu", anu.name);
+    }
+}
+]);
+doh.run();
+});
+    </script>
+
+  </head>
+<body class="tundra" style="padding: 50px;">
+
+  <h1 class="testTitle">JSON Tests</h1>
+
+</body>
+</html>

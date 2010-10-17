@@ -3,7 +3,6 @@
 dojo.provide("code.tests.module");
 
 try{
-/*
     dojo.require("code.tests.new");
     dojo.require("code.tests.mutable");
     doh.registerUrl("code.tests.json",
@@ -15,16 +14,13 @@ try{
     dojo.require("code.tests.scope");
     dojo.require("code.tests.this");
     dojo.require("code.tests.prototypal");
-*/
     //dojo.require("code.tests.extjs");
     doh.registerUrl("code.tests.extjs",
 		    dojo.moduleUrl("code", "tests/extjs.html"), 99999999);
-/*
     dojo.require("code.tests.patterns");
-    dojo.require("code.tests.protection");
+    //dojo.require("code.tests.protection"); // Not yet integrated.
     dojo.require("code.tests.michaux-oop");
-    dojo.require("code.tests.unit-testing");
-*/
+    dojo.require("code.tests.unit-testing"); // Expect one error.
 }catch(e){
     doh.debug(e);
 }
