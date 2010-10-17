@@ -1,16 +1,30 @@
-This project's purpose is to learn, teach, and codify basic knowledge of object-oriented programming in JavaScript.
+This is the oojs01 project. Its purpose is to codify basic knowledge
+of object-oriented programming in JavaScript to facilitate learning of
+that knowledge.
 
-You'll need to install oojs01, the Dojo Toolkit SDK, Ext-JS (Ext-JS just for one test group), and json2.js under a web server's document root. Extract, if and as necessary, and put the Dojo Toolkit SDK (http://downloads.dojotoolkit.org/release-1.5.0/dojo-release-1.5.0-src.tar.gz), ext-js (http://www.sencha.com/products/js/download.php), and json2.js (http://www.json.org/json2.js) in the same directory as oojs01. Be sure to remove or comment-out the first line of json2.js.
+You'll need to install oojs01, the Dojo Toolkit SDK, Ext-JS (Ext-JS
+just for one test group), and json2.js under a web server's document
+root. Extract, if and as necessary, and put the Dojo Toolkit SDK
+(http://downloads.dojotoolkit.org/release-1.5.0/dojo-release-1.5.0-src.tar.gz),
+ext-js (http://www.sencha.com/products/js/download.php), and json2.js
+(http://www.json.org/json2.js) in the same directory as oojs01. Be
+sure to remove or comment-out the first line of json2.js.
 
-When you've got the code installed, you can run it by browsing to runTests.html.
+When you've got the code installed, you can run it by browsing to
+runTests.html, which can be found under oojs01/code/tests/ .
 
 Please let me know how far you get and what you think.
 
-The code was written for Firefox and hasn't been fixed for other browsers yet. You might want to use Firefox's Firebug plugin. You also might want to try Multifirefox, which allows you to use different Firefox profiles simultaneously. I use Sun's free VirtualBox on my Mac to test things under Internet Explorer.
+The code was written for Firefox and hasn't been completely fixed for
+other browsers yet. You might want to use Firefox's Firebug
+plugin. You also might want to try Multifirefox, which allows you to
+use different Firefox profiles simultaneously. I use Sun's free
+VirtualBox on my Mac to test things under Internet Explorer.
 
-16 August, 2010
+18 October, 2010
 Tom Elam
 http://tomelam.com
+http://tomelam.blogspot.com
 
 Copyright 2010 Tom Elam
 
