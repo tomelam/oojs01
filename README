@@ -4,13 +4,15 @@ that knowledge.
 
 You'll need to install oojs01, the Dojo Toolkit SDK, Ext-JS (Ext-JS
 just for one test group), and json2.js under a web server's document
-root. Extract, if and as necessary, and put the Dojo Toolkit SDK
+root. Extract, if and as necessary, and put the SDK
 (http://downloads.dojotoolkit.org/release-1.5.0/dojo-release-1.5.0-src.tar.gz),
 ext-js (http://www.sencha.com/products/js/download.php), and json2.js
 (http://www.json.org/json2.js) in the same directory as oojs01. Be
-sure to remove or comment-out the first line of json2.js.
+sure to remove or comment-out the first line of json2.js. Fix the
+three symbolic links in oojs01/code/ in case you are using a different
+release of the SDK or ext-js than what the links currently point to.
 
-When you've got the code installed, you can run it by browsing to
+When you've got all the code installed, you can run it by browsing to
 runTests.html, which can be found under oojs01/code/tests/ .
 
 Please let me know how far you get and what you think.
