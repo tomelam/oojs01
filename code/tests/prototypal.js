@@ -5,14 +5,13 @@ dojo.provide("code.tests.prototypal");
 
 // Tests to show the basic characteristics of JavaScript's prototypal
 // inheritance. JavaScript does not provide syntax for classical,
-// class-based, inheritance. Instead, it provides directly through its
-// syntax a kind only prototypal inheritance. Prototypal inheritance
-// was developed for the Self language, and is not used in any
-// mainstream language besides JavaScript. Some of the tests here are
-// modelled after examples from Crockford's book _JavaScript: The Good
-// Parts_.
+// class-based, inheritance. Instead, it provides syntax only for
+// prototypal inheritance. Prototypal inheritance was developed for
+// the Self language, and is not used in any mainstream language
+// besides JavaScript.
 
-// Here is a quote from that book:
+// Some of the tests here are modelled after examples from Crockford's
+// book _JavaScript: The Good Parts_. Here is a quote from that book:
 //
 //   "JavaScript is conflicted about its prototypal nature. Its
 //   prototype mechanism is obscured by some complicated syntactic
@@ -26,13 +25,18 @@ dojo.provide("code.tests.prototypal");
 // constructor functions, and if 'clone' were used as a JavaScript
 // keyword to create an object inheriting from another object:
 //
-//   bill = clone person;
+//   balu = clone anand;
+//   cathy = clone balu;
+//   dananjay = clone cathy;
 //
-// The new object could thereafter be modified:
+// New objects could be modified after being created:
 //
-//   bill.firstName = "Bill";
-//   bill.lastName = "Gates";
-//   bill.languages = [ 'Kannada', 'English', 'Hindi', 'Java' ];
+//   balu.firstName = "Bill";
+//   balu.lastName = "B.S.";
+//   cathy.firstName = "Cathy";
+//   cathy.lastName = "Carter";
+//   dananjay.firstName = "Dananjay";
+//   dananjay.lastName = "D.G.";
 
 // To show how prototypal inheritance works in JavaScript, and yet to
 // hide the irrelevant detail Crockford refers to -- the call to the
@@ -44,7 +48,7 @@ tests.register(
 "code.tests.prototypal",
 [
 {
-    name: "1. Prototype inheritance: objects inheriting from objects",
+    name: "1. Objects can inherit from objects using prototypal inheritance",
     setUp: function() {
 	// Here we implement Crockford's Object.create method. It
 	// accepts an object as an argument and returns a new object
@@ -79,7 +83,7 @@ tests.register(
 	// The constructors of alan and bill are identical. Are their names?
 	doh.assertEqual(alan.firstName, bill.firstName);
 	bill.firstName = "Bill";
-	bill.lastName = "Gates";
+	bill.lastName = "Brown";
 	doh.assertNotEqual(alan.firstName, bill.firstName);
 
 	// Are alan's and bill's constructors still identical?
@@ -162,7 +166,7 @@ tests.register(
     }
 },
 {
-    name: "6. Changing the constructor of an object on the fly",
+    name: "6. The constructor of an object can be changed on the fly to change the object's 'class'",
     runTest: function() {
 	var o = {};
 	doh.assertTrue(o instanceof Object);
@@ -180,7 +184,7 @@ tests.register(
     }
 },
 {
-    name: "7. Changing the prototype of an object on the fly",
+    name: "7. A prototype can be changed on the fly to add/remove properties and methods to/from objects in the prototype chain",
     runTest: function() {
 	var Foo = function() { this.bar = 4; };
 	var foo1 = new Foo();
@@ -195,6 +199,97 @@ tests.register(
 	doh.assertEqual("undefined", typeof foo2.baz);
 	var foo3 = new Foo();
 	doh.assertEqual(3, foo3.baz);
+    }
+},
+{
+    name: "8. Setting up one class to inherit from another is complicated (unless hidden in a function)",
+    runTest: function() {
+	// Create a 'class' with a useful constructor and a useful
+	// prototype. Note that JavaScript doesn't have syntax
+	// specifically for creating a class. (Every function object
+	// in JavaScript can be used as a constructor, and inherited
+	// parts must be added one by one to the prototype of the
+	// class.)
+	var Animal = function(name) {
+	    this.name = name;
+	};
+	Animal.prototype.greet = function() {
+	    return "Hi! My name is " + this.name;
+	};
+	anu = new Animal('Anu'); // Anu the amoeba.
+	console.dir(anu);
+	doh.assertEqual("Hi! My name is Anu", anu.greet());
+
+	// Create some classes that inherit from the Animal
+	// class. Each of these classes' constructors calls the
+	// superclass's constructor in the scope of 'this'. As the
+	// book _Pro JavaScript Design Patterns_ states, 'Setting up
+	// one class to inherit from another takes multiple lines of
+	// code (unlike the simple _extend_ keyword in most
+	// object-oriented languages).'
+
+	// Set up and test an Amphibian class, a subclass of Animal.
+	var Amphibian = function(name, numLegs) {
+	    Animal.call(this, name);
+	    this.numLegs = numLegs;
+	};
+	Amphibian.prototype = new Animal();
+	Amphibian.prototype.constructor = Animal;
+	Amphibian.prototype.swim = function() { // Add a method to Author.
+	    console.info('Swim, swim, swim!');
+	};
+	anand = new Amphibian('Anand', 4);
+	console.dir(anand);
+	doh.assertEqual("Hi! My name is Anand", anand.greet());
+	anand.swim();
+
+	// Set up and test a Mammal class, a subclass of Animal.
+	var Mammal = function(init) {
+	    Animal.call(this, name);
+	    this.name = init.name; //Let it be undefined until and if specified.
+	    this.numLegs = init.numLegs || 4;
+	    this.numArms = init.numArms || 0;
+	    this.laysEggs = init.laysEggs || false;
+	    this.standsUpright = init.standsUpright || false;
+	};
+	Mammal.prototype = new Animal();
+	Mammal.prototype.constructor = Animal;
+	Mammal.prototype.breathe = function() { // Add a method to Author.
+	    console.info('Breathe, breathe, breate!');
+	};
+	var manju = new Mammal({name:'Manju', numLegs:4,
+				numArms:0, standsUpright:false});
+	doh.assertEqual("Hi! My name is Manju", manju.greet());
+	manju.breathe();
+
+	var Arthropod = function(name, numSegments) {
+	    Animal.call(this, name);
+	    this.numSegments = numSegments;
+	};
+	Arthropod.prototype = new Animal();
+	Arthropod.prototype.constructor = Animal;
+	Arthropod.prototype.crawl = function() { // Add a method to Author.
+	    console.info('Crawl, crawl, crawl!');
+	};
+	var arthur = new Arthropod('Arthur', 100);
+	doh.assertEqual("Hi! My name is Arthur", arthur.greet());//From Animal.
+	arthur.crawl(); // Not inherited from a superclass.
+
+	// Set up and test an Ape class, a subclass of Mammal.
+	var Ape = function(init) {
+	    Mammal.call(this, name);
+	    this.name = init.name; //Let it be undefined until and if specified.
+	    this.numLegs = init.numLegs || 4;
+	    this.numArms = init.numArms || 0;
+	    this.laysEggs = init.laysEggs || false;
+	    this.standsUpright = init.standsUpright || false;
+	};
+	Ape.prototype = new Mammal({});
+	Ape.prototype.constructor = Mammal;
+	var apu = new Ape({name:'Apu', numLegs:2,
+			   numArms:2, standsUpright:true});
+	doh.assertEqual("Hi! My name is Apu", apu.greet()); //greet from Animal.
+	apu.breathe(); // breathe is inherited from Mammal.
     }
 }
 ]);
