@@ -1,9 +1,13 @@
-// Copyright 2010 Tom Elam
+// Copyright(c) 2010 Tom Elam
+// Licensed under the terms of the GPL 3.0 license.
 
 dojo.provide("code.tests.protection");
 
 
-// Examples of how to implement protection criteria of OO.
+// Examples of how to implement protection criteria of OO. This test
+// group is not integrated into oojs01 and does not provide dependable
+// information. See http://mumble.net/~jar/articles/oo.html on
+// features and properties of object and OO.
 
 tests.register(
 "code.tests.protection",

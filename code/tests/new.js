@@ -1,4 +1,5 @@
-// Copyright 2010 Tom Elam
+// Copyright(c) 2010 Tom Elam
+// Licensed under the terms of the GPL 3.0 license.
 
 dojo.provide("code.tests.new");
 

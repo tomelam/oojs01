@@ -1,4 +1,7 @@
-//Declare out the name of the test module to make dojo's module loader happy.
+// Copyright(c) 2010 Tom Elam
+// Licensed under the terms of the GPL 3.0 license.
+
+//Declare the name of the test module to make dojo's module loader happy.
 dojo.provide("code.tests.unit-testing");
 
 doh.register("unit-testing", [

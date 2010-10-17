@@ -1,4 +1,5 @@
-// Copyright 2010 Tom Elam
+// Copyright(c) 2010 Tom Elam
+// Licensed under the terms of the GPL 3.0 license.
 
 dojo.provide("code.tests.scope");
 
@@ -51,7 +52,7 @@ tests.register(
 {
     name: "2. Declarations ride to the top of a function, but initializations don't",
     runTest: function() {
-	// Pp. 71 - 72, _Object-Oriented JavaScript_, Packt.
+	// See pp. 71 - 72, _Object-Oriented JavaScript_, Packt.
 	
 	var a = 123;
 	function f() {
@@ -65,7 +66,7 @@ tests.register(
 {
     name: "3. A function creates a scope",
     runTest: function() {
-	// P. 80, _Object-Oriented JavaScript_, Packt.
+	// See p. 80, _Object-Oriented JavaScript_, Packt.
 	var a = 1;
 	function f(){
 	    var b = 1;
@@ -78,7 +79,7 @@ tests.register(
 {
     name: "4. Function scope can be nested",
     runTest: function() {
-	// P. 81, _Object-Oriented JavaScript_, Packt.
+	// See p. 81, _Object-Oriented JavaScript_, Packt.
 	var a = 1;
 	console.debug("In runTest");
 	doh.assertEqual(typeof b, "undefined");
@@ -103,7 +104,7 @@ tests.register(
 {
     name: "5. Functions have lexical scope",
     runTest: function() {
-	// Pp. 81 - 81, _Object-Oriented JavaScript_, Packt.
+	// See pp. 81 - 81, _Object-Oriented JavaScript_, Packt.
 
 	// Note: we have to use a function literal to put f1 into the
 	// global scope so that doh.assertError will work and we have
@@ -167,7 +168,7 @@ tests.register(
 {
     name: "6. 'Breaking' the scope chain with a closure",
     runTest: function() {
-	// Pp. 84 - 85, _Object-Oriented JavaScript_, Packt.
+	// See pp. 84 - 85, _Object-Oriented JavaScript_, Packt.
 
 	function f() {
 	    var b = "b";
@@ -183,7 +184,7 @@ tests.register(
 {
     name: "7. 'Breaking' the scope chain with a closure (a different way)",
     runTest: function() {
-	// P. 85, _Object-Oriented JavaScript_, Packt.
+	// See p. 85, _Object-Oriented JavaScript_, Packt.
 
 	var n;
 	function f() {
@@ -200,7 +201,7 @@ tests.register(
 {
     name: "8. A function binds to its scope where defined, not where executed",
     runTest: function() {
-	// Pp. 85 - 86, _Object-Oriented JavaScript_, Packt.
+	// See pp. 85 - 86, _Object-Oriented JavaScript_, Packt.
 
 	function f(arg) {
 	    var n = function() {
