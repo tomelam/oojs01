@@ -53,7 +53,7 @@ tests.register(
     name: "2. Declarations ride to the top of a function, but initializations don't",
     runTest: function() {
 	// See pp. 71 - 72, _Object-Oriented JavaScript_, Packt.
-	
+
 	var a = 123;
 	function f() {
 	    doh.assertEqual("undefined", typeof a);

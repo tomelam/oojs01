@@ -13,7 +13,7 @@ tests.register(
 {
     name: "1. Objects can inherit from objects using prototypal inheritance",
     setUp: function() {
-	
+
     },
     runTest: function() {
 	alan = {

@@ -13,7 +13,7 @@ tests.register(
 {
     name: "1. Singleton pattern",
     runTest: function() {
-	// 
+	//
     }
 },
 ]);
