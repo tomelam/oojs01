@@ -21,7 +21,7 @@ tests.register(
 		}
 	    };
 	};
-	
+
 	// makes different base item
 	makeEspresso = function() {
 	    return {
@@ -33,7 +33,7 @@ tests.register(
 		}
 	    };
 	};
-	
+
 	// Decorate (actually modifies by wrapping certain properties)
 	// a base item or a base item that has already been decorated.
 	// Cream costs extra.
@@ -48,7 +48,7 @@ tests.register(
 	    };
 	    return beverage;
 	};
-	
+
 	// Decorate a beverage with a different condiment.
 	// Sugar is free.
 	decorateWithSugar = function(beverage) {
@@ -58,7 +58,7 @@ tests.register(
 	    };
 	    return beverage;
 	};
-	
+
 	// Watch the changes as my coffee is made in stages.
 	// House blend with milk and sugar
 	myCoffee = makeHouseBlend();
@@ -72,9 +72,9 @@ tests.register(
 	myCoffee = decorateWithSugar(myCoffee);
 	doh.assertEqual('House Blend, Milk, Sugar', myCoffee.toString());
 	doh.assertEqual(1.09, myCoffee.toDollars());
-	
+
 	// double milk espresso
-	var yourCoffee = 
+	var yourCoffee =
 	    decorateWithMilk(decorateWithMilk(makeEspresso()));
 	yourCoffee.toString(); // 'Espresso, Milk, Milk'
 	yourCoffee.toDollars(); // 2.39

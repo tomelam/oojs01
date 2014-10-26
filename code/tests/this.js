@@ -11,7 +11,7 @@ dojo.provide("code.tests.this");
 // book is 'The this parameter is very important in object oriented
 // programming, and its value is determined by the _invocation
 // pattern_.'
-// 
+//
 
 tests.register(
 "code.tests.this",
@@ -126,7 +126,7 @@ tests.register(
 	    return sum;
 	};
 	var array;
-	
+
 	doh.assertEqual(7, add(1, 2, 4));
 
 	array = [2, 4, 8];
